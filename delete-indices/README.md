@@ -11,6 +11,8 @@ pip install -r requirements.txt
 
 ## Run
 
+> Change access permissions
+
 ~~~
 chmod u+x delete-indices.py
 ~~~

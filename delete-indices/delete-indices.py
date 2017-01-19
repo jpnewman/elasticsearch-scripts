@@ -15,7 +15,7 @@ def _parse_args():
     parser.add_argument('-s', '--status',
                         nargs=1,
                         type=str,
-                        default=['closed'],
+                        default='closed',
                         choices=['all', 'open', 'closed', 'none'],
                         help='Elasticsearch indices status')
     parser.add_argument('--dry-run',
@@ -23,10 +23,7 @@ def _parse_args():
                         default=False,
                         help='Dry-run. No action taken')
 
-    args = parser.parse_args()
-    args.status = str(args.status[0]).lower()
-
-    return args
+    return parser.parse_args()
 
 
 def main():
