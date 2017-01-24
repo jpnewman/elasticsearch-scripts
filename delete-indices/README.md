@@ -3,6 +3,10 @@
 
 Delete elasticsearch indices by status.
 
+# References
+
+- <http://elasticsearch-py.readthedocs.io/en/master/api.html>
+
 ## Install python requirements
 
 ~~~bash
@@ -23,16 +27,30 @@ chmod u+x delete-indices.py
 ./delete-indices.py elk-server:9200
 ~~~
 
-### Delete open indices
-
-~~~
-./delete-indices.py elk-server:9200 -s open
-~~~
-
 ### Dry-Run
 
 ~~~
 ./delete-indices.py elk-server:9200 --dry-run
+~~~
+
+### Delete open indices
+
+~~~
+./delete-indices.py elk-server:9200 -s open --dry-run
+~~~
+
+### Delete all indices
+
+~~~
+./delete-indices.py elk-server:9200 -s all --dry-run
+./delete-indices.py elk-server:9200 -s none --dry-run
+~~~
+
+### Delete specific indices
+
+~~~
+./delete-indices.py elk-server:9200 --index-names index-2017.01.22 --dry-run
+./delete-indices.py elk-server:9200 -n index-2017.01.21 index-2017.01.22 --dry-run
 ~~~
 
 ## Lint python script
