@@ -53,6 +53,19 @@ chmod u+x delete-indices.py
 ./delete-indices.py elk-server:9200 -n index-2017.01.21 index-2017.01.22 --dry-run
 ~~~
 
+### Delete specific indices, by RegEx name
+
+~~~
+./delete-indices.py elk-server:9200 --index index-* --dry-run
+./delete-indices.py elk-server:9200 -i index-* --dry-run
+~~~
+
+> Open indices
+
+~~~
+./delete-indices.py elk-server:9200 --status open --index 'gerrit-*' --dry-run
+~~~
+
 ## Lint python script
 
 ~~~

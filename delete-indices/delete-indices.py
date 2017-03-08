@@ -3,6 +3,7 @@
 # NOTE: Why delete_by_query can also be used the following script will allow a dry run.
 
 import argparse
+import re
 
 from elasticsearch import Elasticsearch, ConnectionError, TransportError
 
@@ -23,6 +24,9 @@ def _parse_args():
                         nargs='+',
                         default=[],
                         help='Specific index names')
+    parser.add_argument('-i', '--index',
+                        default='',
+                        help='RegEx index name')
     parser.add_argument('-e', '--exclude-indexes',
                         nargs='+',
                         default=['.kibana'],
@@ -69,6 +73,7 @@ def main():
             return
 
         arguments['index'] = args.index_names
+
     if args.status and 'none' not in args.status:
         arguments['expand_wildcards'] = args.status
 
@@ -92,6 +97,10 @@ def main():
             indices.remove(exclude_index)
 
     for index in indices:
+        if args.index:
+            if not re.search(args.index, index):
+                continue
+
         print(index)
 
         if not args.dry_run:
