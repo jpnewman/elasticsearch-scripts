@@ -1,0 +1,44 @@
+---
+sync_objects:
+  dashboards:
+    index: ".kibana"
+    type: "dashboard"
+    include":
+      - "^artifactory$"
+      - "^redis$"
+
+  searches:
+    index: ".kibana"
+    type: "search"
+    include:
+      - "^Errors$"
+      - "^Gerrit-.*$"
+      - "^artifactory_.*$"
+      - "^grokparsefailure$"
+
+  visualizations:
+    index: ".kibana"
+    type: "visualization"
+    include":
+      - "^artifactory_.*$"
+      - "^redis-.*$"
+      - "^gerrit-.*$"
+
+  templates:
+    index: "_template"
+    type: ""
+    command: ""
+    exclude:
+      - "^filebeat$"
+      - "^packetbeat$"
+      - "^topbeat$"
+      - "^triggered_watches$"
+      - "^watch_history$"
+      - "^watches$"
+
+  mapping:
+    index: "_mapping"
+    type: ""
+    command: ""
+    exclude:
+      - "^.*$"

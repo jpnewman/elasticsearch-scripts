@@ -27,10 +27,10 @@ def _parse_args():
     parser.add_argument('-i', '--index',
                         default='',
                         help='RegEx index name')
-    parser.add_argument('-e', '--exclude-indexes',
+    parser.add_argument('-e', '--exclude-indices',
                         nargs='+',
                         default=['.kibana'],
-                        help='Exclude indexes')
+                        help='Exclude indices')
     parser.add_argument('--dry-run',
                         action='store_true',
                         default=False,
@@ -47,7 +47,7 @@ def main():
         print("WARN: Executing in Dry-Run mode. No action will be taken!")
 
     if args.index_names:
-        print("WARN: Deleting specific indexes: {0}".format(' '.join(args.index_names)))
+        print("WARN: Deleting specific indices: {0}".format(' '.join(args.index_names)))
 
     print("INFO: Deleting indices with status: {0}".format(' '.join(args.status)))
 
@@ -83,15 +83,15 @@ def main():
         print("ERROR: Hosts error: {0}".format(args.hosts))
         print(e)
     except TransportError, e:
-        print("ERROR: Index error: {0}".format(args.index_names))
+        print("ERROR: Index error: {0}".format(' '.join(args.index_names)))
         print(e)
 
     if not indices:
         return
 
-    sorted(indices)
+    indices = sorted(indices)
 
-    for exclude_index in args.exclude_indexes:
+    for exclude_index in args.exclude_indices:
         if exclude_index in indices:
             print("INFO: Index '{0}' is excluded and will not be deleted!".format(exclude_index))
             indices.remove(exclude_index)
